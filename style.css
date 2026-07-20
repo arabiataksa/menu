@@ -1,0 +1,542 @@
+/* =========================================================
+   DESIGN TOKENS
+   A small, consistent palette + type scale used everywhere.
+   ========================================================= */
+:root {
+  /* Colors */
+  --color-bg: #ffffff;
+  --color-surface: #f7f5f2;       /* soft warm neutral for cards/skeletons */
+  --color-border: #ece8e2;
+  --color-ink: #1a1a1a;
+  --color-muted: #6b6b6b;
+  --color-flame: #ff4b3e;         /* primary accent — warm, appetite-driven */
+  --color-flame-dark: #e23b2f;
+  --color-gold: #ffc145;          /* secondary accent for glow + highlights */
+
+  /* Type */
+  --font-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+
+  /* Layout */
+  --max-width: 1200px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-soft: 0 8px 24px rgba(26, 26, 26, 0.06);
+  --shadow-hover: 0 18px 40px rgba(255, 75, 62, 0.18);
+  --transition-base: 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  /* IMPORTANT: no animation/transform here. An 700ms ease forwards" transform
+     on <body> becomes a new containing block for any position:fixed
+     descendant (like #lightbox), which would anchor the lightbox to
+     <body>'s box instead of the viewport and make it drift with scroll.
+     The fade-in lives on .page instead — see below. */
+}
+
+/* Page-load fade-in, scoped to a wrapper instead of <body> so <body>
+   itself never carries a transform. #lightbox sits outside .page, as a
+   direct child of <body>, so it's unaffected by this animation. */
+.page {
+  opacity: 0;
+  animation: page-fade-in 700ms ease forwards;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 20px 56px;
+  text-align: center;
+}
+
+/* Signature touch: a soft flame/gold glow breathing behind the title */
+.hero__glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520px;
+  height: 320px;
+  background: radial-gradient(closest-side, rgba(255, 193, 69, 0.35), rgba(255, 75, 62, 0.12) 60%, transparent 80%);
+  filter: blur(20px);
+  animation: glow-breathe 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  50%      { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+}
+
+.hero__inner {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hero__logo {
+  margin: 0 auto 20px;
+  border-radius: 14px;
+  background-color: #8c0103;
+  box-shadow: 0 0 20px  #444;
+  border: 3px solid #ffe4e4;
+  padding: 12px;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.hero__title-emoji {
+  display: inline-block;
+  animation: flicker 2.4s ease-in-out infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25%      { transform: scale(1.08) rotate(-4deg); }
+  75%      { transform: scale(1.05) rotate(3deg); }
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  color: var(--color-muted);
+}
+
+/* =========================================================
+   OFFERS GRID
+   Mobile-first: 1 column by default, then 2, then 3 columns.
+   ========================================================= */
+.offers {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8px 20px 72px;
+}
+
+.offers__status {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  padding: 40px 0;
+}
+
+.offers__grid {
+  display: grid;
+  grid-template-columns: 1fr;              /* Mobile: 1 column */
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .offers__grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+    gap: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .offers__grid {
+    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+    gap: 32px;
+  }
+}
+
+/* =========================================================
+   OFFER CARD
+   The entire card is a link; only the image is shown (no text,
+   no price, no buttons per the brief).
+   ========================================================= */
+.offer-card {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: none;
+  padding: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  font: inherit;
+  text-align: inherit;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+
+  /* Each card fades/slides in as it's created */
+  opacity: 0;
+  animation: card-in 560ms ease forwards;
+}
+
+.offer-card:hover,
+.offer-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.offer-card:focus-visible {
+  outline: 3px solid var(--color-flame);
+  outline-offset: 3px;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.offer-card__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;      /* Fixed aspect ratio keeps the grid tidy */
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.offer-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* Fill the frame without distortion */
+  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover zoom effect on the image only, card itself lifts (above) */
+.offer-card:hover .offer-card__image,
+.offer-card:focus-visible .offer-card__image {
+  transform: scale(1.07);
+}
+
+/* Thin flame-to-gold underline that sweeps in on hover — the one
+   bold accessory kept from the signature glow in the hero. */
+.offer-card__accent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-flame), var(--color-gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base);
+}
+
+.offer-card:hover .offer-card__accent,
+.offer-card:focus-visible .offer-card__accent {
+  transform: scaleX(1);
+}
+
+/* Skeleton shimmer shown while an individual image is loading */
+.offer-card__frame.is-loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    var(--color-surface) 30%,
+    #efece6 50%,
+    var(--color-surface) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Fallback shown if an offer image fails to load */
+.offer-card__frame.is-broken .offer-card__image {
+  object-fit: contain;
+  padding: 24px;
+  background: var(--color-surface);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  text-align: center;
+  padding: 28px 20px 40px;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Lock page scroll while the lightbox is open */
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* =========================================================
+   LIGHTBOX
+   Fullscreen gallery viewer: dark blurred backdrop, a centered
+   stage that always contains the image (never crops it), nav
+   arrows, zoom controls, and a position counter.
+   ========================================================= */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 280ms ease, visibility 280ms ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Dark semi-transparent background with a subtle blur */
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 10, 9, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* The stage centers the image and clips any panned/zoomed overflow */
+.lightbox__stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none; /* gestures are handled manually in script.js */
+}
+
+.lightbox__image {
+  max-width: 92vw;
+  max-height: 86vh;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* image always fits fully inside the viewport, never cropped */
+  border-radius: 10px;
+  background: transparent;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: translate(0, 0) scale(1);
+  transform-origin: center center;
+  transition: transform 200ms ease, opacity 220ms ease;
+  opacity: 1;
+}
+
+.lightbox__image.is-zoomed {
+  cursor: grab;
+  border-radius: 4px;
+}
+
+/* Zoom-in + fade entrance, replayed each time the lightbox opens */
+.lightbox__image.is-animating-in {
+  animation: lightbox-zoom-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes lightbox-zoom-in {
+  from { opacity: 0; transform: translate(0, 0) scale(0.85); }
+  to   { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+
+/* Crossfade used when switching between images */
+.lightbox__image.is-switching {
+  opacity: 0;
+  transform: translate(0, 0) scale(0.97);
+}
+
+/* Zoom-out + fade while the whole lightbox is closing */
+.lightbox.is-closing .lightbox__image {
+  animation: lightbox-zoom-out 260ms ease forwards;
+}
+
+@keyframes lightbox-zoom-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.85); }
+}
+
+/* ----- Close button ----- */
+.lightbox__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base), transform var(--transition-base);
+  z-index: 2;
+}
+
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  background: var(--color-flame);
+  transform: scale(1.08);
+}
+
+/* ----- Prev / Next navigation ----- */
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base), transform 200ms ease;
+  z-index: 2;
+}
+
+.lightbox__nav:hover,
+.lightbox__nav:focus-visible {
+  background: var(--color-flame);
+}
+
+.lightbox__nav:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.lightbox__nav--prev { left: 16px; }
+.lightbox__nav--next { right: 16px; }
+
+/* ----- Zoom controls ----- */
+.lightbox__zoom-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.lightbox__zoom-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.lightbox__zoom-btn:hover,
+.lightbox__zoom-btn:focus-visible {
+  background: var(--color-flame);
+  transform: scale(1.08);
+}
+
+/* ----- Position counter ----- */
+.lightbox__counter {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  z-index: 2;
+}
+
+/* ----- Small screens: shrink controls, tuck nav closer to the edges ----- */
+@media (max-width: 640px) {
+  .lightbox__nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .lightbox__nav--prev { left: 8px; }
+  .lightbox__nav--next { right: 8px; }
+
+  .lightbox__close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox__image {
+    max-width: 96vw;
+    max-height: 80vh;
+  }
+}
