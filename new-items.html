@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO ===== -->
+  <title>أصناف جديدة | New Items</title>
+  <meta name="description"
+    content="تعرّف على أحدث الأطباق المضافة إلى قائمتنا، مع الاسم والسعر والوصف الكامل لكل صنف." />
+  <link rel="canonical" href="https://example.com/new-items.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="أصناف جديدة | Restaurant Offers" />
+  <meta property="og:description"
+    content="تعرّف على أحدث الأطباق المضافة إلى قائمتنا، مع الاسم والسعر والوصف الكامل لكل صنف." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta property="og:url" content="https://example.com/new-items.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo-1.png" />
+
+  <!-- Font: Cairo supports Arabic + Latin -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Independent stylesheet — not shared with the main offers page -->
+  <link rel="stylesheet" href="items.css" />
+</head>
+
+<body>
+
+  <!--
+    All static content lives inside .page (which carries the page-load
+    fade animation), while #item-modal is a direct child of <body> with
+    no transformed ancestor in between. A "forwards"-filled transform
+    animation on an ancestor would turn it into the containing block for
+    the modal's position:fixed, making it drift with scroll instead of
+    staying centered on the viewport — see items.css for details.
+  -->
+  <div class="page">
+
+    <!-- ===== HERO SECTION ===== -->
+    <header class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <img class="hero__logo" src="logo-62139c6a0b0d6.png" alt="شعار Restaurant Offers" height="90" />
+
+        <h1 class="hero__title">
+          <span class="hero__title-emoji" aria-hidden="true">🍽️</span>
+          أصناف جديدة - New Items
+          <span class="hero__title-emoji" aria-hidden="true">🔥</span>
+        </h1>
+        <p class="hero__subtitle">اكتشف أحدث الأطباق المضافة لقائمتنا، واضغط على الصورة لعرض التفاصيل الكاملة.</p>
+        <p class="hero__subtitle">Discover the latest dishes added to our menu, and click on the image to view full
+          details</p>
+      </div>
+
+      <div class="links">
+        <a class="btn-link" href="https://arabiataksa.github.io/menu/">Offers - العروض</a>
+        <a class="btn-link" href="https://arabiataksa.github.io/menu/new-items">New Items - اصناف جديدة</a>
+      </div>
+    </header>
+
+    <!-- ===== ITEMS SECTION ===== -->
+    <main>
+      <section class="items" aria-label="الأصناف الجديدة">
+        <!-- Loading state, shown while items.json is being fetched -->
+        <div id="items-status" class="items__status" role="status"></div>
+
+        <!-- Item cards are injected here by items.js -->
+        <div id="items-grid" class="items__grid"></div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <p>&copy; 2026 ArabiataKSA</p>
+    </footer>
+
+  </div>
+
+  <!-- ===== ITEM DETAILS MODAL ===== -->
+  <!-- Fullscreen overlay, styled with the same tokens (colors, radius,
+       shadows, type) as the rest of the page. Hidden by default and
+       populated/controlled by items.js. -->
+  <div id="item-modal" class="item-modal" role="dialog" aria-modal="true" aria-hidden="true"
+    aria-labelledby="item-modal-name">
+    <div class="item-modal__backdrop" data-item-modal-close></div>
+
+    <div class="item-modal__panel">
+      <button type="button" class="item-modal__close" data-item-modal-close aria-label="إغلاق">&times;</button>
+
+      <div class="item-modal__media">
+        <img id="item-modal-image" class="item-modal__image" src="" alt="" />
+      </div>
+
+      <div class="item-modal__body">
+        <h2 id="item-modal-name" class="item-modal__name"></h2>
+        <span id="item-modal-price" class="item-modal__price"></span>
+        <p id="item-modal-description" class="item-modal__description"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="items.js"></script>
+</body>
+
+</html>
