@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>National Day Offers - عروض اليوم الوطني | Arabiata</title>
+<link rel="icon" type="image/png" href="logo-1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
@@ -52,7 +53,7 @@
     border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:6px 14px;
     background:rgba(0,0,0,.12);
   }
-  .back:focus-visible,.card:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .back:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   .logo{
     width:118px;height:auto;border-radius:12px;
     border:2px solid var(--white);
@@ -77,49 +78,50 @@
   }
   .validity small{display:block;font-weight:400;color:#5b6b60;direction:ltr}
 
-  main{max-width:760px;margin:0 auto;padding:22px 16px 40px;display:grid;gap:16px}
+  main{
+    max-width:900px;margin:0 auto;padding:22px 14px 40px;
+    display:grid;gap:14px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  @media (min-width:640px){
+    main{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  }
 
   .card{
     background:var(--white);border-radius:18px;overflow:hidden;
-    display:grid;grid-template-columns:132px 1fr;
     border:1px solid #e3dcc8;
+    display:flex;flex-direction:column;
     position:relative;
   }
-  .card img{width:100%;height:100%;min-height:150px;object-fit:cover;background:#eee9d8}
-  .body{padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+  .card .pic{position:relative;aspect-ratio:1/1;background:#eee9d8}
+  .card img{width:100%;height:100%;object-fit:cover;display:block}
   .badge{
-    align-self:flex-start;background:var(--green);color:var(--white);
-    font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;
+    position:absolute;top:10px;inset-inline-start:10px;
+    background:var(--green);color:var(--white);
+    font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
   }
-  .badge small{opacity:.85;margin-inline-start:6px;direction:ltr;display:inline-block}
-  h2{font-family:"Reem Kufi",sans-serif;font-size:21px;line-height:1.2;color:var(--green-deep)}
-  h2 small{display:block;font-family:"IBM Plex Sans Arabic",sans-serif;font-size:13px;font-weight:500;color:#6a7a6f;direction:ltr;text-align:start}
-  .desc{font-size:13.5px;color:#4b5a50;line-height:1.55}
-  .desc small{display:block;direction:ltr;text-align:start;color:#7a887f}
-  .price{margin-top:auto;display:flex;align-items:baseline;gap:10px}
-  .price .now{font-size:26px;font-weight:600;color:var(--brand)}
-  .price .now span{font-size:13px;font-weight:500;margin-inline-start:4px}
-  .price .old{font-size:14px;color:#8a8a8a;text-decoration:line-through}
+  .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+  h2{font-family:"Reem Kufi",sans-serif;font-size:20px;line-height:1.25;color:var(--green-deep)}
+  h2 small{display:block;font-family:"IBM Plex Sans Arabic",sans-serif;font-size:12.5px;font-weight:500;color:#6a7a6f;direction:ltr;text-align:start}
+  .price{margin-top:auto;padding-top:8px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .price .now{font-size:22px;font-weight:600;color:var(--brand)}
+  .price .now span{font-size:12px;font-weight:500;margin-inline-start:3px}
+  .price .old{font-size:13px;color:#8a8a8a;text-decoration:line-through}
 
   footer{text-align:center;padding:0 16px 28px;color:#5b6b60;font-size:13px}
-  .empty{text-align:center;padding:40px 10px;color:#5b6b60}
+  .empty{grid-column:1/-1;text-align:center;padding:40px 10px;color:#5b6b60}
 
-  @media (max-width:420px){
-    .card{grid-template-columns:104px 1fr}
-    h2{font-size:18px}
-  }
   @media (prefers-color-scheme:dark){
     :root{--sand:#101a14;--ink:#EAF1EC}
     .card,.validity{background:#17241c;border-color:#24382b}
     h2{color:#9BD6B0}
-    .desc{color:#B8C7BD}
+    h2 small{color:#9aab9f}
     .validity{color:#9BD6B0}
     .price .now{color:#FF8A80}
   }
   @media (prefers-reduced-motion:no-preference){
-    .card{animation:rise .5s ease both}
-    .card:nth-child(2){animation-delay:.08s}
-    .card:nth-child(3){animation-delay:.16s}
+    .card{animation:rise .45s ease both}
     @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   }
 </style>
@@ -137,7 +139,7 @@
         <span id="titleEn">National Day Offers</span>
       </div>
     </div>
-    <p class="subtitle">نحتفل معكم بيوم الوطن 🇸🇦<small>Celebrating Saudi National Day with you</small></p>
+    <p class="subtitle">نحتفل معكم بيوم الوطن<small>Celebrating Saudi National Day with you</small></p>
   </header>
 
   <div class="validity"><span id="validAr">العروض سارية من ٢٢ إلى ٢٤ سبتمبر</span><small id="validEn">Valid September 22 – 24</small></div>
@@ -161,22 +163,27 @@ fetch('national-day.json', {cache:'no-cache'})
     document.getElementById('validEn').textContent = d.valid_en;
 
     const box = document.getElementById('offers');
-    if (!d.offers || !d.offers.length) { box.innerHTML = '<p class="empty">قريباً · Coming soon</p>'; return; }
+    if (!d.items || !d.items.length) { box.innerHTML = '<p class="empty">قريباً · Coming soon</p>'; return; }
 
-    box.innerHTML = d.offers.map(o => `
+    box.innerHTML = d.items.map(o => {
+      const hasPrice = typeof o.price === 'number';
+      const hasOld = typeof o.old_price === 'number';
+      return `
       <article class="card">
-        <img src="${esc(o.image || 'placeholder.png')}" alt="${esc(o.name_ar)}" loading="lazy"
-             onerror="this.onerror=null;this.src='placeholder.png'">
-        <div class="body">
-          ${o.badge_ar ? `<span class="badge">${esc(o.badge_ar)}<small>${esc(o.badge_en)}</small></span>` : ''}
-          <h2>${esc(o.name_ar)}<small>${esc(o.name_en)}</small></h2>
-          <p class="desc">${esc(o.desc_ar)}<small>${esc(o.desc_en)}</small></p>
-          <div class="price">
-            <span class="now">${fmt(o.price)}<span>SAR ر.س</span></span>
-            ${o.old_price ? `<span class="old">${fmt(o.old_price)}</span>` : ''}
-          </div>
+        <div class="pic">
+          <img src="${esc(encodeURI(o.image || 'placeholder.png'))}" alt="${esc(o.name_ar)}" loading="lazy"
+               onerror="this.onerror=null;this.src='placeholder.png'">
+          ${o.badge_ar ? `<span class="badge">${esc(o.badge_ar)}</span>` : ''}
         </div>
-      </article>`).join('');
+        <div class="body">
+          <h2>${esc(o.name_ar)}<small>${esc(o.name_en)}</small></h2>
+          ${hasPrice ? `<div class="price">
+            <span class="now">${fmt(o.price)}<span>ر.س SAR</span></span>
+            ${hasOld ? `<span class="old">${fmt(o.old_price)}</span>` : ''}
+          </div>` : ''}
+        </div>
+      </article>`;
+    }).join('');
   })
   .catch(() => {
     document.getElementById('offers').innerHTML =
