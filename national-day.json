@@ -2,42 +2,68 @@
   "title_ar": "عروض اليوم الوطني",
   "title_en": "National Day Offers",
   "anniversary_ar": "٩٦",
+  "valid_ar": "العروض سارية من 23 إلى 30 سبتمبر",
+  "valid_en": "Valid September 23 – 30",
   "items": [
     {
       "name_ar": "كرنب",
       "name_en": "Cabbage Rolls",
       "image": "img/كرنب.jpeg",
-      "price": 17 ﷼
-    },
-    {
-      "name_ar": " كفتة دجاج كيلو",
-      "name_en": "Chicken Kofta",
-      "image": "img/كفتة دجاج.jpeg",
-      "price": 40 ﷼
-    },
-    {
-      "name_ar": " كفتة لحم كيلو",
-      "name_en": "Meat Kofta",
-      "image": "img/كفنة لحم.jpeg",
-      "price": 50 ﷼ 
-    },
-    {
-      "name_ar": "مشكل خضار",
-      "name_en": "Mixed Vegetables",
-      "image": "img/مشكل خضار.jpeg",
-      "price": 17 ﷼
-    },
-    {
-      "name_ar": "ممبار",
-      "name_en": "Mumbar",
-      "image": "img/ممبار.jpeg",
-      "price": 17 ﷼
+      "price": 15
     },
     {
       "name_ar": "ورق عنب",
       "name_en": "Grape Leaves",
       "image": "img/ورق عنب.jpeg",
-      "price": 15 ﷼
+      "price": 15
+    },
+    {
+      "name_ar": "ممبار",
+      "name_en": "Mumbar",
+      "image": "img/ممبار.jpeg",
+      "price": 17
+    },
+    {
+      "name_ar": "كفتة لحم - ربع كيلو",
+      "name_en": "Meat Kofta - 1/4 kg",
+      "image": "img/كفتة لحم.jpeg",
+      "price": 20
+    },
+    {
+      "name_ar": "كفتة لحم - نص كيلو",
+      "name_en": "Meat Kofta - 1/2 kg",
+      "image": "img/كفتة لحم.jpeg",
+      "price": 30
+    },
+    {
+      "name_ar": "كفتة لحم - كيلو",
+      "name_en": "Meat Kofta - 1 kg",
+      "image": "img/كفتة لحم.jpeg",
+      "price": 50
+    },
+    {
+      "name_ar": "كفتة دجاج - ربع كيلو",
+      "name_en": "Chicken Kofta - 1/4 kg",
+      "image": "img/كفتة دجاج.jpeg",
+      "price": 15
+    },
+    {
+      "name_ar": "كفتة دجاج - نص كيلو",
+      "name_en": "Chicken Kofta - 1/2 kg",
+      "image": "img/كفتة دجاج.jpeg",
+      "price": 25
+    },
+    {
+      "name_ar": "كفتة دجاج - كيلو",
+      "name_en": "Chicken Kofta - 1 kg",
+      "image": "img/كفتة دجاج.jpeg",
+      "price": 40
+    },
+    {
+      "name_ar": "مشكل خضار",
+      "name_en": "Mixed Vegetables",
+      "image": "img/مشكل خضار.jpeg",
+      "price": 17
     }
   ]
 }
