@@ -1,0 +1,31 @@
+{
+  "title_ar": "عروض اليوم الوطني",
+  "title_en": "National Day Offers",
+  "anniversary_ar": "٩٦",
+  "valid_ar": "العروض سارية من ٢٢ إلى ٢٤ سبتمبر",
+  "valid_en": "Valid September 22 – 24",
+  "offers": [
+    {
+      "name_ar": "وجبة الوطن للشخصين",
+      "name_en": "Watan Meal for Two",
+      "desc_ar": "اكتب هنا محتويات العرض",
+      "desc_en": "Write the offer contents here",
+      "price": 96,
+      "old_price": 130,
+      "image": "img/placeholder.png",
+      "badge_ar": "وفّر ٢٦٪",
+      "badge_en": "Save 26%"
+    },
+    {
+      "name_ar": "وجبة العائلة",
+      "name_en": "Family Feast",
+      "desc_ar": "اكتب هنا محتويات العرض",
+      "desc_en": "Write the offer contents here",
+      "price": 196,
+      "old_price": 260,
+      "image": "img/placeholder.png",
+      "badge_ar": "الأكثر طلباً",
+      "badge_en": "Most Popular"
+    }
+  ]
+}
