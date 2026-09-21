@@ -2,44 +2,42 @@
   "title_ar": "عروض اليوم الوطني",
   "title_en": "National Day Offers",
   "anniversary_ar": "٩٦",
-  "valid_ar": "العروض سارية من ٢٢ إلى ٢٤ سبتمبر",
-  "valid_en": "Valid September 22 – 24",
   "items": [
     {
       "name_ar": "كرنب",
       "name_en": "Cabbage Rolls",
       "image": "img/كرنب.jpeg",
-      "price": null
+      "price": 17 ﷼
     },
     {
-      "name_ar": "كفتة دجاج",
+      "name_ar": " كفتة دجاج كيلو",
       "name_en": "Chicken Kofta",
       "image": "img/كفتة دجاج.jpeg",
-      "price": null
+      "price": 40 ﷼
     },
     {
-      "name_ar": "كفتة لحم",
+      "name_ar": " كفتة لحم كيلو",
       "name_en": "Meat Kofta",
       "image": "img/كفتة لحم.jpeg",
-      "price": null
+      "price": 50 ﷼ 
     },
     {
       "name_ar": "مشكل خضار",
       "name_en": "Mixed Vegetables",
       "image": "img/مشكل خضار.jpeg",
-      "price": null
+      "price": 17 ﷼
     },
     {
       "name_ar": "ممبار",
       "name_en": "Mumbar",
       "image": "img/ممبار.jpeg",
-      "price": null
+      "price": 17 ﷼
     },
     {
       "name_ar": "ورق عنب",
       "name_en": "Grape Leaves",
       "image": "img/ورق عنب.jpeg",
-      "price": null
+      "price": 15 ﷼
     }
   ]
 }
