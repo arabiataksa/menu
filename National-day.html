@@ -168,12 +168,12 @@ fetch('national-day.json', {cache:'no-cache'})
         <img src="${esc(o.image || 'placeholder.png')}" alt="${esc(o.name_ar)}" loading="lazy"
              onerror="this.onerror=null;this.src='placeholder.png'">
         <div class="body">
-          ${o.badge_ar ? <span class="badge">${esc(o.badge_ar)}<small>${esc(o.badge_en)}</small></span> : ''}
+          ${o.badge_ar ? `<span class="badge">${esc(o.badge_ar)}<small>${esc(o.badge_en)}</small></span>` : ''}
           <h2>${esc(o.name_ar)}<small>${esc(o.name_en)}</small></h2>
           <p class="desc">${esc(o.desc_ar)}<small>${esc(o.desc_en)}</small></p>
           <div class="price">
             <span class="now">${fmt(o.price)}<span>SAR ر.س</span></span>
-            ${o.old_price ? <span class="old">${fmt(o.old_price)}</span> : ''}
+            ${o.old_price ? `<span class="old">${fmt(o.old_price)}</span>` : ''}
           </div>
         </div>
       </article>`).join('');
