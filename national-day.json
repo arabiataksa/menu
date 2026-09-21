@@ -9,43 +9,43 @@
       "name_ar": "كرنب",
       "name_en": "Cabbage Rolls",
       "image": "img/كرنب.jpeg",
-      "price": 15.00
+      "price": null
     },
     {
-      "name_ar": "كفتة دجاج كيلو",
+      "name_ar": "كفتة دجاج",
       "name_en": "Chicken Kofta",
       "image": "img/كفتة دجاج.jpeg",
-      "price": 40.00
+      "price": null
     },
     {
-      "name_ar": " كيلو كفتة لحم",
+      "name_ar": "كفتة لحم",
       "name_en": "Meat Kofta",
       "image": "img/كفتة لحم.jpeg",
-      "price": 50.00
+      "price": null
     },
     {
       "name_ar": "مشكل خضار",
       "name_en": "Mixed Vegetables",
       "image": "img/مشكل خضار.jpeg",
-      "price": 17.00
+      "price": null
     },
     {
       "name_ar": "ممبار",
       "name_en": "Mumbar",
       "image": "img/ممبار.jpeg",
-      "price": 17.00
+      "price": null
     },
     {
       "name_ar": "موزة",
       "name_en": "Moza (Lamb Shank)",
       "image": "img/موزة.jpg",
-      "price": 59.00
+      "price": null
     },
     {
       "name_ar": "ورق عنب",
       "name_en": "Grape Leaves",
       "image": "img/ورق عنب.jpeg",
-      "price": 15.00
+      "price": null
     }
   ]
 }
