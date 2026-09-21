@@ -33,13 +33,13 @@
       "name_ar": "كفتة لحم - نص كيلو",
       "name_en": "Meat Kofta - 1/2 kg",
       "image": "img/Meat.jpeg",
-      "price": 30
+      "price": 35
     },
     {
       "name_ar": "كفتة لحم - كيلو",
       "name_en": "Meat Kofta - 1 kg",
       "image": "img/Meat.jpeg",
-      "price": 50
+      "price": 60
     },
     {
       "name_ar": "كفتة دجاج - ربع كيلو",
