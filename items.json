@@ -1,38 +1,38 @@
 [
-  
   {
     "name": "بطاطس جمبري",
     "price": "20 ر.س",
     "description": "بطاطس جمبري بخلطة ارابيتا المميزة.",
     "image": "./img/جمبري.jpg.jpeg"
-  }
-  ,{
+  },
+  {
     "name": "طبق بطاطس دمياطي",
     "price": "15 ر.س",
     "description": "بطاطس دمياطي بخلطة ارابيتا المميزة.",
     "image": "./img/potato-demiattt.jpg"
-  }
-  ,{
+  },
+  {
     "name": "فلافل كفتة",
     "price": "6 ر.س",
     "description": "فلافل كفته مصرية بخلطة ارابياتا المميزة.",
     "image": "./img/flafel-kofta.jpg"
+  },
+  {
+    "name": "كرنب - Cabbage Rolls",
+    "price": "15 ر.س",
+    "description": "",
+    "image": "./img/كرنب.jpeg"
+  },
+  {
+    "name": "ورق عنب - Grape Leaves",
+    "price": "15 ر.س",
+    "description": "",
+    "image": "./img/ورق عنب.jpeg"
+  },
+  {
+    "name": "ممبار - Mumbar",
+    "price": "17 ر.س",
+    "description": "",
+    "image": "./img/ممبار.jpeg"
   }
- {
-      "name_ar": "كرنب",
-      "name_en": "Cabbage Rolls",
-      "image": "img/كرنب.jpeg",
-      "price": 15
-    },
-    {
-      "name_ar": "ورق عنب",
-      "name_en": "Grape Leaves",
-      "image": "img/ورق عنب.jpeg",
-      "price": 15
-    },
-    {
-      "name_ar": "ممبار",
-      "name_en": "Mumbar",
-      "image": "img/ممبار.jpeg",
-      "price": 17
-    },
+]
