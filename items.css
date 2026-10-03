@@ -3,10 +3,11 @@
    Accent colour taken from the logo (deep red)
    ========================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Zilla+Slab:wght@600;700&family=Cairo:wght@400;600;700;800&display=swap");
 
 :root {
-  --display: "Aref Ruqaa", "Cairo", serif;
+  --display: "Zilla Slab", "Aref Ruqaa", "Cairo", serif;
+  --brand-chip: #8c0103;
   --brand: #8f1a0c;
   --brand-dark: #6f1308;
   --brand-soft: #f7e9e6;
@@ -64,10 +65,14 @@ body.modal-open { overflow: hidden; }
 .hero__inner { max-width: 640px; margin: 0 auto; }
 
 .hero__logo {
-  height: 64px;
+  height: 72px;
   width: auto;
   display: block;
   margin: 0 auto 18px;
+  padding: 10px 16px;
+  background: var(--brand-chip);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
 }
 
 .hero__title {
@@ -146,8 +151,8 @@ main { flex: 1; width: 100%; max-width: 1040px; margin: 0 auto; padding: 20px 16
 .item-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .item-card:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
 
-.item-card__media { aspect-ratio: 1 / 1; background: var(--brand-soft); overflow: hidden; }
-.item-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.item-card__media { aspect-ratio: 4 / 3; background: var(--brand-soft); overflow: hidden; }
+.item-card__img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform .4s ease; }
 .item-card:hover .item-card__img { transform: scale(1.04); }
 
 .item-card__body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
@@ -223,8 +228,8 @@ main { flex: 1; width: 100%; max-width: 1040px; margin: 0 auto; padding: 20px 16
 }
 .item-modal__close:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
 
-.item-modal__media { aspect-ratio: 4 / 3; background: var(--brand-soft); }
-.item-modal__image { width: 100%; height: 100%; object-fit: cover; display: block; }
+.item-modal__media { background: var(--brand-soft); }
+.item-modal__image { width: 100%; height: auto; max-height: 60vh; object-fit: contain; display: block; margin: 0 auto; }
 
 .item-modal__body { padding: 20px 22px 26px; display: flex; flex-direction: column; gap: 10px; }
 .item-modal__name { font-family: var(--display); font-size: 1.7rem; font-weight: 700; line-height: 1.5; }
