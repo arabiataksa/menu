@@ -1,104 +1,322 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <!-- ===== SEO ===== -->
   <title>أصناف جديدة | New Items</title>
-  <meta name="description"
-    content="تعرّف على أحدث الأطباق المضافة إلى قائمتنا، مع الاسم والسعر والوصف الكامل لكل صنف." />
-  <link rel="canonical" href="https://example.com/new-items.html" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="أصناف جديدة | Restaurant Offers" />
-  <meta property="og:description"
-    content="تعرّف على أحدث الأطباق المضافة إلى قائمتنا، مع الاسم والسعر والوصف الكامل لكل صنف." />
-  <meta property="og:image" content="assets/logo.png" />
-  <meta property="og:url" content="https://example.com/new-items.html" />
-
-  <!-- Favicon -->
+  <meta name="description" content="تعرّف على أحدث الأطباق المضافة إلى قائمتنا، مع الاسم والسعر والوصف الكامل لكل صنف." />
   <link rel="icon" type="image/png" href="logo-1.png" />
 
-  <!-- Font: Cairo supports Arabic + Latin -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Zilla+Slab:wght@600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Independent stylesheet — not shared with the main offers page -->
-  <link rel="stylesheet" href="items.css" />
+  <!-- All styles are inside this page, so no other CSS file is needed -->
+  <style>
+/* ==========================================================
+   Arabiata – New Items page · modern & simple
+   Accent colour taken from the logo (deep red)
+   ========================================================== */
+
+:root {
+  --display: "Zilla Slab", "Aref Ruqaa", "Cairo", serif;
+  --brand-chip: #8c0103;
+  --brand: #8f1a0c;
+  --brand-dark: #6f1308;
+  --brand-soft: #f7e9e6;
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --line: #ebe6df;
+  --radius: 18px;
+  --shadow: 0 1px 2px rgba(28, 25, 23, .05), 0 6px 20px rgba(28, 25, 23, .06);
+  --shadow-hover: 0 2px 4px rgba(28, 25, 23, .06), 0 14px 32px rgba(28, 25, 23, .12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand: #e0614f;
+    --brand-dark: #c94c3a;
+    --brand-soft: #2b1815;
+    --bg: #131110;
+    --surface: #1d1a18;
+    --ink: #f5f2ee;
+    --muted: #a8a29e;
+    --line: #2d2926;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 20px rgba(0, 0, 0, .25);
+    --shadow-hover: 0 2px 4px rgba(0, 0, 0, .4), 0 14px 32px rgba(0, 0, 0, .45);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.modal-open { overflow: hidden; }
+
+/* Opacity-only animation: a transform here would break the fixed modal */
+.page { animation: fade .5s ease both; min-height: 100vh; display: flex; flex-direction: column; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Header ---------- */
+.hero {
+  padding: 28px 20px 8px;
+  text-align: center;
+}
+.hero__glow, .hero__title-emoji { display: none; }
+
+.hero__inner { max-width: 640px; margin: 0 auto; }
+
+.hero__logo {
+  height: 72px;
+  width: auto;
+  display: block;
+  margin: 0 auto 18px;
+  padding: 10px 16px;
+  background: var(--brand-chip);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+}
+
+.hero__title {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.25;
+}
+
+.hero__subtitle {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .95rem;
+}
+.hero__subtitle + .hero__subtitle { margin-top: 2px; font-size: .85rem; direction: ltr; }
+
+/* ---------- Page switch (pill) ---------- */
+.links {
+  display: inline-flex;
+  gap: 4px;
+  margin: 22px auto 6px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.hero { display: flex; flex-direction: column; align-items: center; }
+
+.btn-link {
+  font-family: var(--display);
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 6px 18px;
+  border-radius: 999px;
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.btn-link:hover { color: var(--ink); }
+.btn-link.is-active {
+  background: var(--brand);
+  color: #fff;
+}
+.btn-link:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+/* ---------- Grid ---------- */
+main { flex: 1; width: 100%; max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+
+.items__status { text-align: center; color: var(--muted); padding: 30px 0; }
+.items__status:empty { display: none; }
+
+.items__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 640px)  { .items__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+@media (min-width: 1024px) { .items__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
+
+/* ---------- Card ---------- */
+.item-card {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.item-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.item-card:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+.item-card__media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--brand-soft);
+  min-height: 160px;
+}
+.item-card__bg { display: none; }
+.item-card__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform .4s ease;
+}
+.item-card:hover .item-card__img { transform: scale(1.03); }
+
+.item-card__body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.item-card__name { font-family: var(--display); font-size: 1.2rem; font-weight: 700; line-height: 1.5; }
+.item-card__price {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--brand);
+  background: var(--brand-soft);
+  padding: 2px 12px;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item-card, .item-card__img { transition: none; }
+}
+
+/* ---------- Footer ---------- */
+.site-footer { text-align: center; padding: 22px 16px 28px; color: var(--muted); font-size: .82rem; border-top: 1px solid var(--line); }
+
+/* ---------- Modal ---------- */
+.item-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .25s ease, visibility .25s;
+}
+.item-modal.is-open { visibility: visible; opacity: 1; }
+
+.item-modal__backdrop { position: absolute; inset: 0; background: rgba(15, 12, 10, .55); backdrop-filter: blur(4px); }
+
+.item-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, .25);
+  transform: translateY(24px);
+  transition: transform .3s ease;
+}
+.item-modal.is-open .item-modal__panel { transform: none; }
+
+@media (min-width: 640px) {
+  .item-modal { align-items: center; padding: 24px; }
+  .item-modal__panel { border-radius: 24px; }
+}
+
+.item-modal__close {
+  position: absolute;
+  top: 12px;
+  inset-inline-start: 12px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  color: #1c1917;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+}
+.item-modal__close:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+.item-modal__media { background: var(--brand-soft); }
+.item-modal__media .item-card__bg { display: none; }
+.item-modal__image { width: 100%; height: auto; max-height: 68vh; object-fit: contain; display: block; margin: 0 auto; }
+
+.item-modal__body { padding: 20px 22px 26px; display: flex; flex-direction: column; gap: 10px; }
+.item-modal__name { font-family: var(--display); font-size: 1.7rem; font-weight: 700; line-height: 1.5; }
+.item-modal__price {
+  align-self: flex-start;
+  font-weight: 700;
+  color: var(--brand);
+  background: var(--brand-soft);
+  padding: 3px 14px;
+  border-radius: 999px;
+}
+.item-modal__description { color: var(--muted); font-size: 1rem; }
+.item-modal__description:empty { display: none; }
+
+/* ---- final safety rules: photos always whole, natural proportions ---- */
+.item-card__media{aspect-ratio:auto!important;height:auto!important}
+.item-card__img{width:100%!important;height:auto!important;object-fit:contain!important;max-width:100%}
+  </style>
 </head>
-
 <body>
-
-  <!--
-    All static content lives inside .page (which carries the page-load
-    fade animation), while #item-modal is a direct child of <body> with
-    no transformed ancestor in between. A "forwards"-filled transform
-    animation on an ancestor would turn it into the containing block for
-    the modal's position:fixed, making it drift with scroll instead of
-    staying centered on the viewport — see items.css for details.
-  -->
   <div class="page">
 
-    <!-- ===== HERO SECTION ===== -->
     <header class="hero">
       <div class="hero__glow" aria-hidden="true"></div>
-
       <div class="hero__inner">
-        <img class="hero__logo" src="logo-62139c6a0b0d6.png" alt="شعار Restaurant Offers" height="90" />
-
+        <img class="hero__logo" src="logo-62139c6a0b0d6.png" alt="شعار Arabiata" height="90" />
         <h1 class="hero__title">
           <span class="hero__title-emoji" aria-hidden="true">🍽️</span>
           أصناف جديدة - New Items
           <span class="hero__title-emoji" aria-hidden="true">🔥</span>
         </h1>
         <p class="hero__subtitle">اكتشف أحدث الأطباق المضافة لقائمتنا، واضغط على الصورة لعرض التفاصيل الكاملة.</p>
-        <p class="hero__subtitle">Discover the latest dishes added to our menu, and click on the image to view full
-          details</p>
+        <p class="hero__subtitle">Discover the latest dishes added to our menu, and click on the image to view full details</p>
       </div>
-
       <div class="links">
         <a class="btn-link" href="https://arabiataksa.github.io/menu/">Offers - العروض</a>
-        <a class="btn-link" href="https://arabiataksa.github.io/menu/new-items">New Items - اصناف جديدة</a>
+        <a class="btn-link is-active" href="https://arabiataksa.github.io/menu/new-items">New Items - اصناف جديدة</a>
       </div>
     </header>
 
-    <!-- ===== ITEMS SECTION ===== -->
     <main>
       <section class="items" aria-label="الأصناف الجديدة">
-        <!-- Loading state, shown while items.json is being fetched -->
         <div id="items-status" class="items__status" role="status"></div>
-
-        <!-- Item cards are injected here by items.js -->
         <div id="items-grid" class="items__grid"></div>
       </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="site-footer">
       <p>&copy; 2026 ArabiataKSA</p>
     </footer>
-
   </div>
 
-  <!-- ===== ITEM DETAILS MODAL ===== -->
-  <!-- Fullscreen overlay, styled with the same tokens (colors, radius,
-       shadows, type) as the rest of the page. Hidden by default and
-       populated/controlled by items.js. -->
-  <div id="item-modal" class="item-modal" role="dialog" aria-modal="true" aria-hidden="true"
-    aria-labelledby="item-modal-name">
+  <div id="item-modal" class="item-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="item-modal-name">
     <div class="item-modal__backdrop" data-item-modal-close></div>
-
     <div class="item-modal__panel">
       <button type="button" class="item-modal__close" data-item-modal-close aria-label="إغلاق">&times;</button>
-
       <div class="item-modal__media">
         <img id="item-modal-image" class="item-modal__image" src="" alt="" />
       </div>
-
       <div class="item-modal__body">
         <h2 id="item-modal-name" class="item-modal__name"></h2>
         <span id="item-modal-price" class="item-modal__price"></span>
@@ -107,7 +325,120 @@
     </div>
   </div>
 
-  <script src="items.js"></script>
-</body>
+  <script>
+(function () {
+  "use strict";
 
+  var PLACEHOLDER = "placeholder.png";
+
+  var grid = document.getElementById("items-grid");
+  var statusEl = document.getElementById("items-status");
+  var modal = document.getElementById("item-modal");
+  var mImg = document.getElementById("item-modal-image");
+  var mName = document.getElementById("item-modal-name");
+  var mPrice = document.getElementById("item-modal-price");
+  var mDesc = document.getElementById("item-modal-description");
+  var lastFocus = null;
+
+  // blurred background layer inside the popup photo area
+  var mBg = el("div", "item-card__bg");
+  mImg.parentNode.insertBefore(mBg, mImg);
+
+  // Highlight the link of the page we are on
+  Array.prototype.forEach.call(document.querySelectorAll(".btn-link"), function (a) {
+    var onNew = /new-items/.test(location.pathname);
+    var isNewLink = /new-items/.test(a.getAttribute("href"));
+    if (onNew === isNewLink) a.classList.add("is-active");
+  });
+
+  function setImg(img, src) {
+    img.onerror = function () { img.onerror = null; img.src = PLACEHOLDER; };
+    img.src = encodeURI(src || PLACEHOLDER);
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+
+  function openModal(item, trigger) {
+    lastFocus = trigger;
+    setImg(mImg, item.image);
+    mBg.style.backgroundImage = 'url("' + encodeURI(item.image || PLACEHOLDER) + '")';
+    mImg.alt = item.name || "";
+    mName.textContent = item.name || "";
+    mPrice.textContent = item.price || "";
+    mPrice.style.display = item.price ? "" : "none";
+    mDesc.textContent = item.description || "";
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    modal.querySelector(".item-modal__close").focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    if (lastFocus) lastFocus.focus();
+  }
+
+  Array.prototype.forEach.call(modal.querySelectorAll("[data-item-modal-close]"), function (n) {
+    n.addEventListener("click", closeModal);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+
+  function render(items) {
+    grid.textContent = "";
+    items.forEach(function (item) {
+      var card = el("button", "item-card");
+      card.type = "button";
+
+      var media = el("div", "item-card__media");
+      var bg = el("div", "item-card__bg");
+      bg.style.backgroundImage = 'url("' + encodeURI(item.image || PLACEHOLDER) + '")';
+      media.appendChild(bg);
+      var img = el("img", "item-card__img");
+      img.alt = item.name || "";
+      img.loading = "lazy";
+      setImg(img, item.image);
+      media.appendChild(img);
+
+      var body = el("div", "item-card__body");
+      body.appendChild(el("h2", "item-card__name", item.name));
+      if (item.price) body.appendChild(el("span", "item-card__price", item.price));
+
+      card.appendChild(media);
+      card.appendChild(body);
+      card.addEventListener("click", function () { openModal(item, card); });
+      grid.appendChild(card);
+    });
+  }
+
+  statusEl.textContent = "جاري التحميل... Loading...";
+
+  fetch("items.json?v=" + Date.now(), { cache: "no-store" })
+    .then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    })
+    .then(function (items) {
+      if (!Array.isArray(items) || !items.length) {
+        statusEl.textContent = "قريباً · Coming soon";
+        return;
+      }
+      statusEl.textContent = "";
+      render(items);
+    })
+    .catch(function () {
+      statusEl.textContent = "تعذر تحميل الأصناف · Could not load items";
+    });
+})();
+
+  </script>
+</body>
 </html>
