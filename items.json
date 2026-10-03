@@ -18,4 +18,21 @@
     "description": "فلافل كفته مصرية بخلطة ارابياتا المميزة.",
     "image": "./img/flafel-kofta.jpg"
   }
-]
+ {
+      "name_ar": "كرنب",
+      "name_en": "Cabbage Rolls",
+      "image": "img/كرنب.jpeg",
+      "price": 15
+    },
+    {
+      "name_ar": "ورق عنب",
+      "name_en": "Grape Leaves",
+      "image": "img/ورق عنب.jpeg",
+      "price": 15
+    },
+    {
+      "name_ar": "ممبار",
+      "name_en": "Mumbar",
+      "image": "img/ممبار.jpeg",
+      "price": 17
+    },
